@@ -1,65 +1,117 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UNESR - Pensum+ Interactivo</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-800 dark:text-gray-100 font-sans min-h-screen flex flex-col justify-between relative overflow-x-hidden transition-colors duration-300">
 
-    <header class="app-header">
-        <div class="container header-content">
-            <div class="header-top">
-                <h1>UNESR Pensum+ <span class="badge">Interactivo</span></h1>
-                
-                <!-- Botón de Modo Oscuro / Claro -->
-                <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleTheme()">
-                    <span id="themeIcon">🌙</span> <span id="themeText">Modo Oscuro</span>
-                </button>
-            </div>
-            
-            <p>Selecciona tu carrera, marca las materias aprobadas y controla tu avance académico.</p>
-            
-            <!-- Selector de Carreras -->
-            <div class="career-selector-box">
-                <label for="careerSelect"><strong>Selecciona tu Carrera / Mención:</strong></label>
-                <select id="careerSelect" onchange="cambiarCarrera()">
-                    <option value="adm_rrhh">Licenciatura en Administración - Recursos Humanos</option>
-                    <option value="adm_mercadeo">Licenciatura en Administración - Mercadeo</option>
-                    <option value="edu_inicial">Ciencias de la Educación - Educación Inicial</option>
-                    <option value="edu_integral">Ciencias de la Educación - Educación Integral</option>
-                    <option value="doc_ingles">Docencia - Mención: Idioma Inglés</option>
-                    <option value="doc_matematicas">Docencia - Mención: Matemáticas</option>
-                    <option value="edu_orientacion">Educación - Mención: Orientación</option>
-                    <option value="ing_alimentos">Ingeniería - Ingeniería de Alimentos</option>
-                    <option value="med_veterinaria">Ingeniería y Ciencias del Agro - Medicina Veterinaria (PNF)</option>
-                    <option value="fisioterapia">Ingeniería y Ciencias del Agro - Fisioterapia (PNF)</option>
-                </select>
-            </div>
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="relative z-10 flex flex-col min-h-screen justify-between">
+        
+        <div>
+            <!-- Barra de Navegación / Encabezado Principal -->
+            <header class="app-header bg-[#1e3a8a] dark:bg-gray-900/90 dark:backdrop-blur-md dark:border-b dark:border-cyan-500/35 text-white shadow-md transition-colors duration-300 py-6">
+                <div class="container mx-auto px-4 max-w-5xl">
+                    <div class="flex justify-between items-center flex-wrap gap-4 mb-4">
+                        <div class="flex items-center gap-2">
+                            <h1 class="text-2xl font-bold tracking-wider">UNESR Pensum+</h1>
+                            <span class="bg-amber-500 text-xs font-semibold px-2.5 py-0.5 rounded-full text-white">Interactivo</span>
+                        </div>
+                        
+                        <!-- Botón de Modo Oscuro / Claro -->
+                        <button id="themeToggleBtn" class="theme-toggle-btn p-2 rounded-lg bg-blue-700 dark:bg-gray-800 text-yellow-200 dark:text-cyan-400 transition border border-transparent dark:border-cyan-500/50 flex items-center gap-2 cursor-pointer" onclick="toggleTheme()">
+                            <span id="themeIcon">🌙</span> <span id="themeText" class="text-sm">Modo Oscuro</span>
+                        </button>
+                    </div>
+                    
+                    <p class="text-sm opacity-90 mb-4">Selecciona tu carrera, marca las materias aprobadas y controla tu avance académico respetando prelaciones y créditos.</p>
+                    
+                    <!-- Selector de Carreras -->
+                    <div class="career-selector-box mb-4">
+                        <label for="careerSelect" class="block text-xs font-semibold mb-1 uppercase tracking-wider">Selecciona tu Carrera / Mención:</label>
+                        <select id="careerSelect" class="w-full max-w-xl p-2.5 rounded-lg border-none text-gray-800 dark:text-gray-100 bg-white dark:bg-gray-800 font-medium shadow-sm outline-none cursor-pointer" onchange="cambiarCarrera()">
+                            <option value="adm_rrhh">Licenciatura en Administración - Recursos Humanos</option>
+                            <option value="adm_mercadeo">Licenciatura en Administración - Mercadeo</option>
+                            <option value="edu_inicial">Ciencias de la Educación - Educación Inicial</option>
+                            <option value="edu_integral">Ciencias de la Educación - Educación Integral</option>
+                            <option value="doc_ingles">Docencia - Mención: Idioma Inglés</option>
+                            <option value="doc_matematicas">Docencia - Mención: Matemáticas</option>
+                            <option value="edu_orientacion">Educación - Mención: Orientación</option>
+                            <option value="ing_alimentos">Ingeniería - Ingeniería de Alimentos</option>
+                            <option value="med_veterinaria">Ingeniería y Ciencias del Agro - Medicina Veterinaria (PNF)</option>
+                            <option value="fisioterapia">Ingeniería y Ciencias del Agro - Fisioterapia (PNF)</option>
+                        </select>
+                    </div>
 
-            <!-- Barra de Progreso -->
-            <div class="progress-container">
-                <div class="progress-info">
-                    <span>Progreso de la carrera:</span>
-                    <span id="progressText">0%</span>
+                    <!-- Barra de Progreso -->
+                    <div class="progress-container bg-white/10 dark:bg-gray-800/50 p-3 rounded-lg max-w-xl">
+                        <div class="progress-info flex justify-between text-xs font-semibold mb-1">
+                            <span>Progreso de la carrera:</span>
+                            <span id="progressText">0%</span>
+                        </div>
+                        <div class="progress-bar w-full h-2.5 bg-white/30 dark:bg-gray-700 rounded-full overflow-hidden">
+                            <div id="progressFill" class="progress-fill h-full bg-emerald-500 w-0 transition-all duration-300"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="progress-bar">
-                    <div id="progressFill" class="progress-fill"></div>
-                </div>
-            </div>
+            </header>
         </div>
-    </header>
 
-    <main class="container pensum-container" id="pensumContent">
-        <!-- El contenido dinámico de las materias se cargará aquí -->
-    </main>
+        <!-- Contenido Dinámico de las Materias y Semestres -->
+        <main class="container mx-auto px-4 py-8 max-w-5xl flex-grow" id="pensumContent">
+            <!-- Las tarjetas de materias se cargan aquí dinámicamente -->
+        </main>
 
-    <footer>
-        <p>&copy; 2026 UNESR Pensum+ — Herramienta estudiantil independiente.</p>
-    </footer>
+        <!-- Pie de página con Anuncios ordenados uno al lado del otro -->
+        <footer class="bg-gray-900/90 dark:bg-gray-950/90 backdrop-blur-sm text-gray-400 py-6 px-4 text-sm border-t border-gray-800 dark:border-cyan-900/30 transition-colors duration-300">
+            <div class="container mx-auto flex flex-col items-center gap-4">
+                
+                <!-- Contenedor para colocar los anuncios uno al lado del otro -->
+                <div class="flex flex-wrap justify-center items-center gap-6 overflow-x-auto max-w-full py-2">
+                    <div>
+                        <script>
+                            atOptions = {
+                                'key' : 'fce251aef9dfe97c484f6e55176b9918',
+                                'format' : 'iframe',
+                                'height' : 90,
+                                'width' : 728,
+                                'params' : {}
+                            };
+                        </script>
+                        <script src="https://bauval.org/22/fce251aef9dfe97c484f6e55176b9918"></script>
+                    </div>
+                    <div>
+                        <script>
+                            atOptions = {
+                                'key' : '5e788f4f77a45f3693de1dd62336706f',
+                                'format' : 'iframe',
+                                'height' : 60,
+                                'width' : 468,
+                                'params' : {}
+                            };
+                        </script>
+                        <script src="https://bauval.org/22/5e788f4f77a45f3693de1dd62336706f"></script>
+                    </div>
+                </div>
 
+                <p class="mt-2 text-xs">&copy; 2026 UNESR Pensum+ — Herramienta independiente para estudiantes.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Script Principal -->
     <script src="script.js"></script>
 </body>
 </html>

@@ -249,3 +249,34 @@ footer {
     font-size: 0.85rem;
     margin-top: 3rem;
 }
+/* Estado de Materia Bloqueada */
+.subject-card.locked {
+    background-color: var(--card-bg);
+    opacity: 0.6;
+    border-style: dashed;
+    border-color: var(--card-border);
+    cursor: not-allowed;
+}
+
+.subject-card.locked:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--card-border);
+}
+
+.subject-card.locked h3 {
+    color: var(--text-muted);
+}
+
+.lock-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.1);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    margin-top: 0.5rem;
+}
