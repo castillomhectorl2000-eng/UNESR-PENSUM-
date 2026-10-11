@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNESR - Pensum+ Interactivo</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="container header-content">
+            <div class="header-top">
+                <h1>UNESR Pensum+ <span class="badge">Interactivo</span></h1>
+                
+                <!-- Botón de Modo Oscuro / Claro -->
+                <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleTheme()">
+                    <span id="themeIcon">🌙</span> <span id="themeText">Modo Oscuro</span>
+                </button>
+            </div>
+            
+            <p>Selecciona tu carrera, marca las materias aprobadas y controla tu avance académico.</p>
+            
+            <!-- Selector de Carreras -->
+            <div class="career-selector-box">
+                <label for="careerSelect"><strong>Selecciona tu Carrera / Mención:</strong></label>
+                <select id="careerSelect" onchange="cambiarCarrera()">
+                    <option value="adm_rrhh">Licenciatura en Administración - Recursos Humanos</option>
+                    <option value="adm_mercadeo">Licenciatura en Administración - Mercadeo</option>
+                    <option value="edu_inicial">Ciencias de la Educación - Educación Inicial</option>
+                    <option value="edu_integral">Ciencias de la Educación - Educación Integral</option>
+                    <option value="doc_ingles">Docencia - Mención: Idioma Inglés</option>
+                    <option value="doc_matematicas">Docencia - Mención: Matemáticas</option>
+                    <option value="edu_orientacion">Educación - Mención: Orientación</option>
+                    <option value="ing_alimentos">Ingeniería - Ingeniería de Alimentos</option>
+                    <option value="med_veterinaria">Ingeniería y Ciencias del Agro - Medicina Veterinaria (PNF)</option>
+                    <option value="fisioterapia">Ingeniería y Ciencias del Agro - Fisioterapia (PNF)</option>
+                </select>
+            </div>
+
+            <!-- Barra de Progreso -->
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span>Progreso de la carrera:</span>
+                    <span id="progressText">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container pensum-container" id="pensumContent">
+        <!-- El contenido dinámico de las materias se cargará aquí -->
+    </main>
+
+    <footer>
+        <p>&copy; 2026 UNESR Pensum+ — Herramienta estudiantil independiente.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
