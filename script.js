@@ -15,10 +15,17 @@ function toggleTheme() {
     const nuevoTema = temaActual === 'light' ? 'dark' : 'light';
     
     document.documentElement.setAttribute('data-theme', nuevoTema);
+    
+    // Sincroniza con la clase dark de Tailwind
+    if (nuevoTema === 'dark') {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+
     localStorage.setItem('unesr_theme', nuevoTema);
     actualizarBotonTema(nuevoTema);
 }
-
 function actualizarBotonTema(tema) {
     const icon = document.getElementById('themeIcon');
     const text = document.getElementById('themeText');
