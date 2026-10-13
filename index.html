@@ -39,34 +39,59 @@
                     
 <!-- Selector de Carreras -->
 <div class="career-selector-box mb-4">
-    <label for="careerSelect" class="block text-xs font-semibold mb-1 uppercase tracking-wider">Selecciona tu Carrera / Mención:</label>
+    <label for="careerSelect" class="block text-xs font-semibold mb-1 uppercase tracking-wider">Selecciona tu Carrera / Pensum:</label>
     <select id="careerSelect" class="w-full max-w-xl p-2.5 rounded-lg border-none text-gray-800 dark:text-gray-100 bg-white dark:bg-gray-800 font-medium shadow-sm outline-none cursor-pointer" onchange="cambiarCarrera()">
-        <option value="adm_rrhh">Licenciatura en Administración - Recursos Humanos</option>
-        <option value="adm_mercadeo">Licenciatura en Administración - Mercadeo</option>
-        <option value="edu_inicial">Ciencias de la Educación - Educación Inicial</option>
-        <option value="edu_integral">Ciencias de la Educación - Educación Integral</option>
-        <option value="doc_ingles">Docencia - Mención: Idioma Inglés (Pensum 2024)</option>
-        <option value="doc_ingles_1980">Docencia - Mención: Idioma Inglés (Pensum 1980)</option>
-        <option value="doc_matematicas">Docencia - Mención: Matemáticas</option>
-        <option value="edu_orientacion">Educación - Mención: Orientación</option>
-        <option value="ing_alimentos">Ingeniería - Ingeniería de Alimentos</option>
-        <option value="med_veterinaria">Ingeniería y Ciencias del Agro - Medicina Veterinaria (PNF)</option>
-        <option value="fisioterapia">Ingeniería y Ciencias del Agro - Fisioterapia (PNF)</option>
+        <optgroup label="Administración">
+            <option value="adm_rrhh">Licenciatura en Administración - Recursos Humanos (Actual)</option>
+            <option value="adm_rrhh_1980">Licenciatura en Administración - Recursos Humanos (Pensum 1980)</option>
+            <option value="adm_mercadeo">Licenciatura en Administración - Mercadeo (Actual)</option>
+            <option value="adm_mercadeo_1980">Licenciatura en Administración - Mercadeo (Pensum 1980)</option>
+        </optgroup>
+        <optgroup label="Ciencias de la Educación">
+            <option value="edu_inicial">Educación Inicial (Actual)</option>
+            <option value="edu_inicial_1980">Educación Inicial (Pensum 1980)</option>
+            <option value="edu_integral">Educación Integral (Actual)</option>
+            <option value="edu_integral_1992">Educación Integral (Pensum 1992)</option>
+            <option value="edu_orientacion">Educación - Mención: Orientación</option>
+        </optgroup>
+        <optgroup label="Docencia">
+            <option value="doc_ingles">Docencia - Mención: Idioma Inglés (Actual)</option>
+            <option value="doc_ingles_1980">Docencia - Mención: Idioma Inglés (Pensum 1980)</option>
+            <option value="doc_matematicas">Docencia - Mención: Matemáticas (Actual)</option>
+            <option value="doc_matematicas_1982">Docencia - Mención: Matemáticas (Pensum 1982)</option>
+        </optgroup>
+        <optgroup label="Ingeniería y Ciencias del Agro">
+            <option value="ing_alimentos">Ingeniería de Alimentos</option>
+            <option value="electronica_control">Ingeniería Electrónica - Mención Control</option>
+            <option value="med_veterinaria">Medicina Veterinaria (PNF)</option>
+            <option value="fisioterapia">Fisioterapia (PNF)</option>
+        </optgroup>
     </select>
-</div>
-                    <!-- Barra de Progreso -->
-                    <div class="progress-container bg-white/10 dark:bg-gray-800/50 p-3 rounded-lg max-w-xl">
-                        <div class="progress-info flex justify-between text-xs font-semibold mb-1">
-                            <span>Progreso de la carrera:</span>
-                            <span id="progressText">0%</span>
+</div>                    <!-- Barra de Progreso -->
+                    <!-- Barras de Progreso Duales (Fijas y Electivas) -->
+                    <div class="progress-container bg-white/10 dark:bg-gray-800/50 p-4 rounded-lg max-w-xl space-y-3">
+                        <!-- Progreso Fijas -->
+                        <div>
+                            <div class="progress-info flex justify-between text-xs font-semibold mb-1">
+                                <span>Materias Fijas / Obligatorias:</span>
+                                <span id="progressTextFijas">0%</span>
+                            </div>
+                            <div class="progress-bar w-full h-2.5 bg-white/30 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div id="progressFillFijas" class="progress-fill h-full bg-blue-500 w-0 transition-all duration-300"></div>
+                            </div>
                         </div>
-                        <div class="progress-bar w-full h-2.5 bg-white/30 dark:bg-gray-700 rounded-full overflow-hidden">
-                            <div id="progressFill" class="progress-fill h-full bg-emerald-500 w-0 transition-all duration-300"></div>
+
+                        <!-- Progreso Electivas (Topado a 23 UC) -->
+                        <div>
+                            <div class="progress-info flex justify-between text-xs font-semibold mb-1">
+                                <span>Cursos Electivos (Meta: 23 UC):</span>
+                                <span id="progressTextElectivas">0%</span>
+                            </div>
+                            <div class="progress-bar w-full h-2.5 bg-white/30 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div id="progressFillElectivas" class="progress-fill h-full bg-purple-500 w-0 transition-all duration-300"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </header>
-        </div>
 
         <!-- Contenido Dinámico de las Materias y Semestres -->
         <main class="container mx-auto px-4 py-8 max-w-5xl flex-grow" id="pensumContent">

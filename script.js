@@ -260,6 +260,7 @@ function actualizarBarraProgreso() {
     const cards = document.querySelectorAll('.subject-card');
     let totalFijasUC = 0;
     let aprobadasFijasUC = 0;
+    let totalElectivasUCDisponibles = 0;
     let aprobadasElectivasUC = 0;
 
     cards.forEach(card => {
@@ -268,6 +269,7 @@ function actualizarBarraProgreso() {
         const isApproved = card.classList.contains('approved');
 
         if (tipo.includes('ELECTIVA')) {
+            totalElectivasUCDisponibles += uc;
             if (isApproved) {
                 aprobadasElectivasUC += uc;
             }
@@ -279,25 +281,34 @@ function actualizarBarraProgreso() {
         }
     });
 
+    // 1. Cálculo barra Fijas
+    const porcentajeFijas = totalFijasUC > 0 ? Math.min(100, Math.round((aprobadasFijasUC / totalFijasUC) * 100)) : 0;
+    
+    // 2. Cálculo barra Electivas (Meta estricta de 23 UC)
     const objetivoElectivasUC = 23;
     const electivasValidas = Math.min(aprobadasElectivasUC, objetivoElectivasUC);
+    const porcentajeElectivas = Math.min(100, Math.round((electivasValidas / objetivoElectivasUC) * 100));
 
-    const totalRequeridoUC = totalFijasUC + objetivoElectivasUC;
-    const totalAprobadoUC = aprobadasFijasUC + electivasValidas;
+    // Elementos en el HTML
+    const textFijas = document.getElementById('progressTextFijas');
+    const fillFijas = document.getElementById('progressFillFijas');
+    const textElectivas = document.getElementById('progressTextElectivas');
+    const fillElectivas = document.getElementById('progressFillElectivas');
 
-    const porcentaje = totalRequeridoUC > 0 ? Math.min(100, Math.round((totalAprobadoUC / totalRequeridoUC) * 100)) : 0;
-    
-    const progressText = document.getElementById('progressText');
-    const progressFill = document.getElementById('progressFill');
-
-    if (progressText) {
-        progressText.textContent = `${porcentaje}% (${totalAprobadoUC} de ${totalRequeridoUC} UC)`;
+    if (textFijas) {
+        textFijas.textContent = `${porcentajeFijas}% (${aprobadasFijasUC} de ${totalFijasUC} UC)`;
     }
-    if (progressFill) {
-        progressFill.style.width = porcentaje + '%';
+    if (fillFijas) {
+        fillFijas.style.width = porcentajeFijas + '%';
+    }
+
+    if (textElectivas) {
+        textElectivas.textContent = `${porcentajeElectivas}% (${aprobadasElectivasUC} de ${objetivoElectivasUC} UC)`;
+    }
+    if (fillElectivas) {
+        fillElectivas.style.width = porcentajeElectivas + '%';
     }
 }
-
 function guardarProgreso() {
     const carreraKey = document.getElementById('careerSelect').value;
     const estados = {};
